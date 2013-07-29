@@ -31,6 +31,8 @@ NeoBundle 'scrooloose/nerdtree.git'
 NeoBundle "vim-scripts/taglist.vim"
 NeoBundle "wesleyche/SrcExpl"
 NeoBundle "nathanaelkane/vim-indent-guides"
+NeoBundle "tpope/vim-endwise"
+NeoBundle "Townk/vim-autoclose"
 
 nmap <silent> <C-e>      :NERDTreeToggle<CR>
 vmap <silent> <C-e> <Esc>:NERDTreeToggle<CR>
