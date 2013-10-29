@@ -8,7 +8,7 @@ set hlsearch
 set incsearch
 set cursorline
 colorscheme molokai
-"set background=dark
+" set background=dark
 :map <F1> :Unite file<CR>
 filetype off
 
@@ -27,13 +27,27 @@ NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'jpalardy/vim-slime'
 NeoBundle 'scrooloose/syntastic'
-NeoBundle 'scrooloose/nerdtree.git'
-NeoBundle "vim-scripts/taglist.vim"
 NeoBundle "wesleyche/SrcExpl"
 NeoBundle "nathanaelkane/vim-indent-guides"
 NeoBundle "tpope/vim-endwise"
 NeoBundle "Townk/vim-autoclose"
+NeoBundle 'tpope/vim-markdown'
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'tyru/open-browser.vim'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'airblade/vim-gitgutter'
+nnoremap <silent> ,gg :<C-u>GitGutterToggle<CR>
+nnoremap <silent> ,gh :<C-u>GitGutterLineHighlightsToggle<CR>
 
+NeoBundle 'AndrewRadev/switch.vim'
+nnoremap - :Switch<cr>
+
+let g:quickrun_config = {}
+let g:quickrun_config['markdown'] = {
+      \ 'outputter' : 'browser'
+      \ }
+
+NeoBundle 'scrooloose/nerdtree.git'
 nmap <silent> <C-e>      :NERDTreeToggle<CR>
 vmap <silent> <C-e> <Esc>:NERDTreeToggle<CR>
 omap <silent> <C-e>      :NERDTreeToggle<CR>
@@ -41,6 +55,7 @@ imap <silent> <C-e> <Esc>:NERDTreeToggle<CR>
 cmap <silent> <C-e> <C-u>:NERDTreeToggle<CR>
 let g:NERDTreeIgnore=['\.clean$', '\.swp$', '\.bak$', '\~$']
 
+NeoBundle "vim-scripts/taglist.vim"
 let Tlist_Ctags_Cmd = "/usr/local/bin/ctags" 
 let Tlist_Show_One_File = 1
 let Tlist_Use_Right_Window = 1
@@ -79,6 +94,16 @@ let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 
+NeoBundle 'teramako/jscomplete-vim'
+NeoBundle 'myhere/vim-nodejs-complete'
+
+autocmd FileType javascript setlocal omnifunc=nodejscomplete#CompleteJS
+if !exists('g:neocomplcache_omni_functions')
+    let g:neocomplcache_omni_functions = {}
+endif
+let g:neocomplcache_omni_functions.javascript = 'nodejscomplete#CompleteJS'
+
+let g:node_usejscomplete = 1
 
 filetype plugin indent on     " required!
 filetype indent on
