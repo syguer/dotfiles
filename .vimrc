@@ -7,6 +7,7 @@ set nocompatible
 set hlsearch
 set incsearch
 set cursorline
+set foldmethod=manual
 colorscheme molokai
 " set background=dark
 :map <F1> :Unite file<CR>
@@ -36,6 +37,7 @@ NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'tpope/vim-surround'
 nnoremap <silent> ,gg :<C-u>GitGutterToggle<CR>
 nnoremap <silent> ,gh :<C-u>GitGutterLineHighlightsToggle<CR>
 
@@ -46,6 +48,9 @@ let g:quickrun_config = {}
 let g:quickrun_config['markdown'] = {
       \ 'outputter' : 'browser'
       \ }
+
+""for php
+autocmd FileType php,ctp :set dictionary=~/.vim/dict/php.dict
 
 NeoBundle 'scrooloose/nerdtree.git'
 nmap <silent> <C-e>      :NERDTreeToggle<CR>
@@ -68,12 +73,12 @@ let g:SrcExpl_gobackKey = "<SPACE>"
 
 ""NeoBundle 'https://bitbucket.org/kovisoft/slimv'
 let g:neocomplcache_enable_underbar_completion = 1
-
+let g:neocomplcache_enable_at_startup = 1 
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
-      return neocomplcache#smart_close_popup() . "\<CR>"
+      "return neocomplcache#smart_close_popup() . "\<CR>"
         " For no inserting <CR> key.
-        "   "return pumvisible() ? neocomplcache#close_popup() : "\<CR>"
+      return pumvisible() ? neocomplcache#close_popup() : "\<CR>"
 endfunction
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
@@ -94,7 +99,6 @@ let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 
-NeoBundle 'teramako/jscomplete-vim'
 NeoBundle 'myhere/vim-nodejs-complete'
 
 autocmd FileType javascript setlocal omnifunc=nodejscomplete#CompleteJS
