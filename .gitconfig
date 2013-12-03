@@ -1,0 +1,15 @@
+[user]
+	name = syguer
+	email = ksk.i.530@gmail.com
+[color]
+	ui = true
+[core]
+	editor = /usr/bin/vim
+[alias]
+  st = status
+  ct = commit 
+  rb = rebase
+  co = checkout
+  cpk = cherry-pick
+  br = branch
+  gr = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
