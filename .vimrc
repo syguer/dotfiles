@@ -1,6 +1,7 @@
 set number
 set tabstop=2
 set autoindent
+set smarttab
 set expandtab
 set shiftwidth=2
 set nocompatible
@@ -8,42 +9,45 @@ set hlsearch
 set incsearch
 set cursorline
 set foldmethod=manual
+set tags=tags
 colorscheme molokai
 " set background=dark
-:map <F1> :Unite file<CR>
-filetype off
 
+"save undo
+if has('persistent_undo')
+  set undodir=~/.vim/undo
+  set undofile
+endif
+
+"set cusor on last saved line
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\""
+
+syntax off
+filetype off
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim
   call neobundle#rc(expand('~/.vim/bundle/'))
 endif
+
 " originalrepos on github
 NeoBundle 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/vimproc'
-NeoBundle 'VimClojure'
-NeoBundle 'Shougo/vimshell'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/vimfiler.vim'
-NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'jpalardy/vim-slime'
+NeoBundle 'tpope/vim-surround'
 NeoBundle 'scrooloose/syntastic'
-NeoBundle "wesleyche/SrcExpl"
-NeoBundle "nathanaelkane/vim-indent-guides"
 NeoBundle "tpope/vim-endwise"
 NeoBundle "Townk/vim-autoclose"
 NeoBundle 'tpope/vim-markdown'
-NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'digitaltoad/vim-jade'
+
 NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'tpope/vim-surround'
 nnoremap <silent> ,gg :<C-u>GitGutterToggle<CR>
 nnoremap <silent> ,gh :<C-u>GitGutterLineHighlightsToggle<CR>
 
 NeoBundle 'AndrewRadev/switch.vim'
 nnoremap - :Switch<cr>
 
+NeoBundle 'thinca/vim-quickrun'
 let g:quickrun_config = {}
 let g:quickrun_config['markdown'] = {
       \ 'outputter' : 'browser'
@@ -71,7 +75,8 @@ map <silent> <F2> :SrcExpl <CR>
 let g:SrcExpl_jumpKey = "<ENTER>" 
 let g:SrcExpl_gobackKey = "<SPACE>"
 
-""NeoBundle 'https://bitbucket.org/kovisoft/slimv'
+NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'Shougo/neosnippet'
 let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_enable_at_startup = 1 
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
@@ -83,12 +88,7 @@ endfunction
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 
-let g:vimfiler_as_default_explorer = 1
-hi Pmenu ctermbg=0
-hi PmenuSel ctermbg=4
-hi PmenuSbar ctermbg=2
-hi PmenuThumb ctermfg=3
-
+NeoBundle "nathanaelkane/vim-indent-guides"
 let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=black   ctermbg=black
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=darkgray ctermbg=darkgrey
