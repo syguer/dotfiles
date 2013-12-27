@@ -10,8 +10,9 @@ set incsearch
 set cursorline
 set foldmethod=manual
 set tags=tags
-colorscheme molokai
-" set background=dark
+"colorscheme molokai
+colorscheme jellybeans
+"set background=dark
 
 "save undo
 if has('persistent_undo')
@@ -39,6 +40,7 @@ NeoBundle 'tpope/vim-markdown'
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'digitaltoad/vim-jade'
+NeoBundle 'hail2u/vim-css3-syntax'
 
 NeoBundle 'airblade/vim-gitgutter'
 nnoremap <silent> ,gg :<C-u>GitGutterToggle<CR>
@@ -108,6 +110,9 @@ endif
 let g:neocomplcache_omni_functions.javascript = 'nodejscomplete#CompleteJS'
 
 let g:node_usejscomplete = 1
+
+NeoBundle 'jiangmiao/simple-javascript-indenter'
+let g:SimpleJsIndenter_BriefMode = 2
 
 filetype plugin indent on     " required!
 filetype indent on
