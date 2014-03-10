@@ -10,6 +10,8 @@ set incsearch
 set cursorline
 set foldmethod=manual
 set tags=tags
+set laststatus=2
+
 "colorscheme molokai
 colorscheme jellybeans
 "set background=dark
@@ -52,8 +54,16 @@ nnoremap - :Switch<cr>
 NeoBundle 'thinca/vim-quickrun'
 let g:quickrun_config = {}
 let g:quickrun_config['markdown'] = {
-      \ 'outputter' : 'browser'
+      \ 'outputter': 'browser'
       \ }
+
+NeoBundle 'bling/vim-airline'
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_left_sep = '▶'
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#syntastic#enabled = 1
 
 ""for php
 autocmd FileType php,ctp :set dictionary=~/.vim/dict/php.dict
