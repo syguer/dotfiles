@@ -11,6 +11,8 @@ set cursorline
 set foldmethod=manual
 set tags=tags
 set laststatus=2
+set nobackup
+set noswapfile
 
 "colorscheme molokai
 colorscheme jellybeans
@@ -83,6 +85,9 @@ let Tlist_Use_Right_Window = 1
 let Tlist_Exit_OnlyWindow = 1
 map <silent> <C-t> :TlistToggle<CR>  
 
+NeoBundle "majutsushi/tagbar"
+nmap <silent> ,t :TagbarToggle<CR>
+
 map <silent> <F2> :SrcExpl <CR>
 let g:SrcExpl_jumpKey = "<ENTER>" 
 let g:SrcExpl_gobackKey = "<SPACE>"
@@ -111,8 +116,11 @@ let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 
-NeoBundle 'myhere/vim-nodejs-complete'
 
+""for javascript
+NeoBundle 'jelera/vim-javascript-syntax'
+
+NeoBundle 'myhere/vim-nodejs-complete'
 autocmd FileType javascript setlocal omnifunc=nodejscomplete#CompleteJS
 if !exists('g:neocomplcache_omni_functions')
     let g:neocomplcache_omni_functions = {}
