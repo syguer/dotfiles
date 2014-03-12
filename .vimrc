@@ -46,6 +46,13 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'digitaltoad/vim-jade'
 NeoBundle 'hail2u/vim-css3-syntax'
 
+NeoBundle 'Shougo/vimproc.vim' , {
+      \ 'build' : {
+      \     'mac' : 'make -f make_mac.mak'},
+\}
+NeoBundle 'Shougo/vimshell.vim'
+nmap <silent> ,s :VimShell<CR>
+
 NeoBundle 'airblade/vim-gitgutter'
 nnoremap <silent> ,gg :<C-u>GitGutterToggle<CR>
 nnoremap <silent> ,gh :<C-u>GitGutterLineHighlightsToggle<CR>
