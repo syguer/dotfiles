@@ -25,7 +25,7 @@ if has('persistent_undo')
 endif
 
 "set cusor on last saved line
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\""
+"au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\""
 
 syntax off
 filetype off
@@ -33,6 +33,8 @@ if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim
   call neobundle#rc(expand('~/.vim/bundle/'))
 endif
+
+runtime macros/matchit.vim
 
 " originalrepos on github
 NeoBundle 'Shougo/neobundle.vim'
@@ -42,16 +44,25 @@ NeoBundle "tpope/vim-endwise"
 NeoBundle "Townk/vim-autoclose"
 NeoBundle 'tpope/vim-markdown'
 NeoBundle 'tyru/open-browser.vim'
-NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'digitaltoad/vim-jade'
 NeoBundle 'hail2u/vim-css3-syntax'
+NeoBundle 'vim-scripts/matchparenpp'
+
+NeoBundle 'tpope/vim-fugitive'
+nnoremap <silent> ,gs :Gstatus<CR>
+
+NeoBundle 'int3/vim-extradite'
+nnoremap <silent> ,gl :Extradite<CR>
+
+NeoBundle 'Lokaltog/vim-easymotion'
+map <Leader> <Plug>(easymotion-prefix)
 
 NeoBundle 'Shougo/vimproc.vim' , {
       \ 'build' : {
       \     'mac' : 'make -f make_mac.mak'},
 \}
 NeoBundle 'Shougo/vimshell.vim'
-nmap <silent> ,s :VimShell<CR>
+nnoremap <silent> ,sh :VimShell<CR>
 
 NeoBundle 'airblade/vim-gitgutter'
 nnoremap <silent> ,gg :<C-u>GitGutterToggle<CR>
@@ -141,4 +152,5 @@ let g:SimpleJsIndenter_BriefMode = 2
 
 filetype plugin indent on     " required!
 filetype indent on
+filetype on
 syntax on
