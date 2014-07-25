@@ -36,17 +36,18 @@ endif
 
 runtime macros/matchit.vim
 
+
 " originalrepos on github
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'scrooloose/syntastic'
-NeoBundle "tpope/vim-endwise"
 NeoBundle "Townk/vim-autoclose"
 NeoBundle 'tpope/vim-markdown'
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'digitaltoad/vim-jade'
 NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'vim-scripts/matchparenpp'
+
 
 NeoBundle 'tpope/vim-fugitive'
 nnoremap <silent> ,gs :Gstatus<CR>
@@ -68,8 +69,6 @@ NeoBundle 'airblade/vim-gitgutter'
 nnoremap <silent> ,gg :<C-u>GitGutterToggle<CR>
 nnoremap <silent> ,gh :<C-u>GitGutterLineHighlightsToggle<CR>
 
-NeoBundle 'AndrewRadev/switch.vim'
-nnoremap - :Switch<cr>
 
 NeoBundle 'thinca/vim-quickrun'
 let g:quickrun_config = {}
@@ -95,6 +94,8 @@ omap <silent> <C-e>      :NERDTreeToggle<CR>
 imap <silent> <C-e> <Esc>:NERDTreeToggle<CR>
 cmap <silent> <C-e> <C-u>:NERDTreeToggle<CR>
 let g:NERDTreeIgnore=['\.clean$', '\.swp$', '\.bak$', '\~$']
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 NeoBundle "vim-scripts/taglist.vim"
 let Tlist_Ctags_Cmd = "/usr/local/bin/ctags" 
@@ -112,6 +113,12 @@ let g:SrcExpl_gobackKey = "<SPACE>"
 
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'honza/vim-snippets'
+let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
 let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_enable_at_startup = 1 
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
@@ -134,6 +141,11 @@ let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 
+"for ruby
+NeoBundle "vim-scripts/ruby-matchit"
+NeoBundle "tpope/vim-endwise"
+NeoBundle 'AndrewRadev/switch.vim'
+nnoremap - :Switch<cr>
 
 ""for javascript
 NeoBundle 'jelera/vim-javascript-syntax'
