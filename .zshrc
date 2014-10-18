@@ -11,29 +11,11 @@ setopt list_packed
 
 # aliases
 alias ll="ls -alG"
-alias ctags="/usr/local/Cellar/ctags/5.8/bin/ctags"
-alias apachectl+"/usr/local/Cellar/httpd/2.2.27/sbin/apachectl"
-
-# show branch name
-autoload -Uz vcs_info
-setopt prompt_subst
-zstyle ':vcs_info:git:*' check-for-changes true
-zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
-zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
-zstyle ':vcs_info:*' formats "%F{green}%c%u[%b]%f"
-zstyle ':vcs_info:*' actionformats '[%b|%a]'
-precmd () { vcs_info }
-RPROMPT='${vcs_info_msg_0_}'
 
 [[ -s /Users/keisuke/.nvm/nvm.sh ]] && . /Users/keisuke/.nvm/nvm.sh ]]
 
-PATH=$PATH:$HOME/.composer/vendor/bin/
-
-export PATH="$HOME/.rbenv/bin:$PATH"
+PATH=$(brew --prefix)/bin:$HOME/.composer/vendor/bin/:$HOME/.rbenv/bin:$PATH
 eval "$(rbenv init -)"
-
-export GOPATH=/usr/local/Cellar/go/1.2.2/
-PATH=$PATH:$GOPATH/bin
 
 # using peco
 function peco-select-history() {
@@ -57,5 +39,24 @@ fpath=(~/zsh-completions/src $fpath)
 
 autoload -U compinit; compinit
 
-PROMPT="[%n@%m]%(!,#,$)%b "
-RPROMPT=$RPROMPT"[%d]"
+# show branch name
+autoload -Uz vcs_info
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd _get_vcs_info
+setopt prompt_subst
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
+zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
+zstyle ':vcs_info:*' formats " %F{blue}(%r %c%u%b%f%F{blue})%f "
+zstyle ':vcs_info:*' actionformats '[%b|%a]'
+_get_vcs_info () { 
+  vcs_info
+  if [ -z "$vcs_info_msg_0_" ];then
+    PROMPT="[%n@%m]%(!,#,$) "
+    return 0
+  fi
+  PROMPT="[%n@%m]${vcs_info_msg_0_}%(!,#,$) "
+}
+
+RPROMPT="[%d]"
