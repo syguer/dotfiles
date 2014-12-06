@@ -1,7 +1,11 @@
 # Created by newuser for 5.0.2
 LANG=ja_JP.UTF-8
+
+# 履歴
+export HISTFILE=${HOME}/.zsh_history
+export HISTSIZE=1000
+export SAVEHIST=100000
 setopt hist_ignore_dups
-setopt share_history
 
 source ~/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
@@ -11,6 +15,14 @@ setopt list_packed
 
 # aliases
 alias ll="ls -alG"
+alias g=git
+alias t=tmux
+alias v=vim
+alias gcc=gcc-4.9
+alias vrc='vim ~/.vimrc'
+alias zrc='vim ~/.zshrc'
+alias rezsh='source ~/.zshrc'
+alias vima='vim ~/.aliases'
 
 [[ -s /Users/keisuke/.nvm/nvm.sh ]] && . /Users/keisuke/.nvm/nvm.sh ]]
 
@@ -50,7 +62,7 @@ zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
 zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
 zstyle ':vcs_info:*' formats " %F{blue}(%r %c%u%b%f%F{blue})%f "
 zstyle ':vcs_info:*' actionformats '[%b|%a]'
-_get_vcs_info () { 
+_get_vcs_info () {
   vcs_info
   if [ -z "$vcs_info_msg_0_" ];then
     PROMPT="[%n@%m]%(!,#,$) "
@@ -60,3 +72,8 @@ _get_vcs_info () {
 }
 
 RPROMPT="[%d]"
+
+export GOPATH=~/.golang
+PATH=$GOPATH/bin:$PATH
+
+[ -f ~/.aliase ]; source ~/.aliases
