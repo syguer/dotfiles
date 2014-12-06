@@ -13,9 +13,11 @@ set tags=tags
 set laststatus=2
 set nobackup
 set noswapfile
+set backspace=indent,eol,start
 
 "colorscheme molokai
-colorscheme jellybeans
+"colorscheme jellybeans
+colorscheme hybrid
 "set background=dark
 
 "save undo
@@ -25,7 +27,7 @@ if has('persistent_undo')
 endif
 
 "set cusor on last saved line
-"au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\""
+au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\""
 
 syntax off
 filetype off
@@ -36,6 +38,11 @@ endif
 
 runtime macros/matchit.vim
 
+augroup HighlightTrailingSpaces
+  autocmd!
+  autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces term=underline guibg=Red ctermbg=Red
+  autocmd VimEnter,WinEnter * match TrailingSpaces /\s\+$/
+augroup END
 
 " originalrepos on github
 NeoBundle 'Shougo/neobundle.vim'
@@ -69,6 +76,7 @@ NeoBundle 'airblade/vim-gitgutter'
 nnoremap <silent> ,gg :<C-u>GitGutterToggle<CR>
 nnoremap <silent> ,gh :<C-u>GitGutterLineHighlightsToggle<CR>
 
+nnoremap <silent> ,bp obinding.pry<ESC>
 
 NeoBundle 'thinca/vim-quickrun'
 let g:quickrun_config = {}
@@ -97,55 +105,120 @@ let g:NERDTreeIgnore=['\.clean$', '\.swp$', '\.bak$', '\~$']
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-NeoBundle "vim-scripts/taglist.vim"
-let Tlist_Ctags_Cmd = "/usr/local/bin/ctags" 
-let Tlist_Show_One_File = 1
-let Tlist_Use_Right_Window = 1
-let Tlist_Exit_OnlyWindow = 1
-map <silent> <C-t> :TlistToggle<CR>  
+NeoBundle 'jeetsukumaran/vim-buffergator'
 
 NeoBundle "majutsushi/tagbar"
 nmap <silent> ,t :TagbarToggle<CR>
 
+let g:tagbar_type_ruby = {
+    \ 'kinds' : [
+        \ 'm:modules',
+        \ 'c:classes',
+        \ 'd:describes',
+        \ 'C:contexts',
+        \ 'f:methods',
+        \ 'F:singleton methods'
+    \ ]
+\ }
+
 map <silent> <F2> :SrcExpl <CR>
-let g:SrcExpl_jumpKey = "<ENTER>" 
+let g:SrcExpl_jumpKey = "<ENTER>"
 let g:SrcExpl_gobackKey = "<SPACE>"
 
-NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'Shougo/neocomplete'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'honza/vim-snippets'
+let g:acp_enableAtStartup = 0
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  "return neocomplete#close_popup() . "\<CR>"
+  " For no inserting <CR> key.
+  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+endfunction
+
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplete#close_popup()
+inoremap <expr><C-e>  neocomplete#cancel_popup()
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+
+
 let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
-let g:neocomplcache_enable_underbar_completion = 1
-let g:neocomplcache_enable_at_startup = 1 
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-      "return neocomplcache#smart_close_popup() . "\<CR>"
-        " For no inserting <CR> key.
-      return pumvisible() ? neocomplcache#close_popup() : "\<CR>"
-endfunction
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 
-NeoBundle "nathanaelkane/vim-indent-guides"
-let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=black   ctermbg=black
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=darkgray ctermbg=darkgrey
-"hi IndentGuidesOdd  ctermbg=black
-"hi IndentGuidesEven ctermbg=darkgrey
-"set ts=2 sw=2 et
-let g:indent_guides_enable_on_vim_startup=1
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
+NeoBundle 'Yggdroot/indentLine'
+let g:indentLine_color_term = 240
+let g:indentLine_char = '¦'
+
+NeoBundle 'h1mesuke/vim-alignta'
+set ambiwidth=double
+xnoremap <silent> A  :Alignta =>\=<CR>
+xnoremap <silent> a: :Alignta  01 :<CR>
+xmap <silent><expr> as mode() !=# 'v' ? ':Alignta \S\+'."\<CR>" : 'as'
+xnoremap al :Alignta<Space>
+
+
+NeoBundle 'tomtom/tcomment_vim'
+
+NeoBundle 't9md/vim-quickhl'
+nmap <Space>m <Plug>(quickhl-manual-this)
+xmap <Space>m <Plug>(quickhl-manual-this)
+nmap <Space>M <Plug>(quickhl-manual-reset)
+xmap <Space>M <Plug>(quickhl-manual-reset)
+
+" text object
+NeoBundle 'kana/vim-textobj-user'
+NeoBundle 'sgur/vim-textobj-parameter'
+NeoBundle 'rhysd/vim-textobj-ruby'
+NeoBundle 'kana/vim-textobj-indent'
+NeoBundle 'kana/vim-textobj-function'
+NeoBundle 'osyo-manga/vim-textobj-multiblock'
+NeoBundle 'deris/vim-textobj-enclosedsyntax'
+NeoBundle 'thinca/vim-textobj-function-javascript'
+NeoBundle 'osyo-manga/vim-textobj-multitextobj'
+
+map _  <Plug>(operator-replace)
+
+omap ab <Plug>(textobj-multiblock-a)
+omap ib <Plug>(textobj-multiblock-i)
+xmap ab <Plug>(textobj-multiblock-a)
+xmap ib <Plug>(textobj-multiblock-i)
+
+let g:textobj_multitextobj_textobjects_i = [
+\   "\<Plug>(textobj-enclosedsyntax-i)",
+\   "\<Plug>(textobj-multiblock-i)",
+\   "\<Plug>(textobj-function-i)",
+\]
+
+let g:textobj_multitextobj_textobjects_a = [
+\   "\<Plug>(textobj-enclosedsyntax-a)",
+\   "\<Plug>(textobj-multiblock-a)",
+\   "\<Plug>(textobj-function-a)",
+\]
+
+omap amt <Plug>(textobj-multitextobj-a)
+omap imt <Plug>(textobj-multitextobj-i)
+vmap amt <Plug>(textobj-multitextobj-a)
 
 "for ruby
 NeoBundle "vim-scripts/ruby-matchit"
 NeoBundle "tpope/vim-endwise"
 NeoBundle 'AndrewRadev/switch.vim'
 nnoremap - :Switch<cr>
+
+NeoBundle 'tpope/vim-rails'
 
 ""for javascript
 NeoBundle 'jelera/vim-javascript-syntax'
@@ -162,6 +235,11 @@ let g:node_usejscomplete = 1
 NeoBundle 'jiangmiao/simple-javascript-indenter'
 let g:SimpleJsIndenter_BriefMode = 2
 
+"for coffee
+NeoBundle 'kchmck/vim-coffee-script'
+au BufRead,BufNewFile,BufReadPre *.coffee   set filetype=coffee
+
+set encoding=utf-8
 filetype plugin indent on     " required!
 filetype indent on
 filetype on
