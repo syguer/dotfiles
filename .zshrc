@@ -19,10 +19,26 @@ alias g=git
 alias t=tmux
 alias v=vim
 alias gcc=gcc-4.9
-alias vrc='vim ~/.vimrc'
-alias zrc='vim ~/.zshrc'
+alias vrc='vim ~/dotfiles/.vimrc'
+alias zrc='vim ~/dotfiles/.zshrc'
+alias gcon='vim ~/dotfiles/.gitconfig'
 alias rezsh='source ~/.zshrc'
 alias vima='vim ~/.aliases'
+alias dot='cd ~/dotfiles'
+
+# ruby
+alias be='bundle exec'
+
+# rails
+alias ra='bundle exec rails'
+alias sp='bundle exec rspec spec'
+alias gu='bundle exec guard start'
+alias mi='bundle exec rake db:migrate'
+alias ro='bundle exec rake db:rollback'
+alias gmi='bundle exec rails g migration'
+alias con='bundle exec rails c'
+alias seed='bundle exec rake db:seed'
+alias rroute='bundle exec rake routes | peco'
 
 [[ -s /Users/keisuke/.nvm/nvm.sh ]] && . /Users/keisuke/.nvm/nvm.sh ]]
 
@@ -75,5 +91,6 @@ RPROMPT="[%d]"
 
 export GOPATH=~/.golang
 PATH=$GOPATH/bin:$PATH
+export PS1='\[\033[33m\]\u@MacMini\[\033[00m\]:\[\033[36m\]\w\[\033[35m\]$(__git_ps1)\[\033[00m\]\$ '
 
 [ -f ~/.aliase ]; source ~/.aliases

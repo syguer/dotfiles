@@ -18,6 +18,9 @@ set backspace=indent,eol,start
 "colorscheme molokai
 "colorscheme jellybeans
 colorscheme hybrid
+"colorscheme Tomorrow-Night
+"colorscheme Tomorrow-Night-Eighties
+"colorscheme Tomorrow-Night-Bright
 "set background=dark
 
 "save undo
@@ -54,13 +57,23 @@ NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'digitaltoad/vim-jade'
 NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'vim-scripts/matchparenpp'
+NeoBundle 'thinca/vim-qfreplace'
 
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+cnoremap <C-f> <Right>
+cnoremap <C-b> <Left>
 
 NeoBundle 'tpope/vim-fugitive'
 nnoremap <silent> ,gs :Gstatus<CR>
+nnoremap <silent> ,gd :Gdiff<CR>
+nnoremap <silent> ,gpo :Gpush origin<CR>
 
 NeoBundle 'int3/vim-extradite'
 nnoremap <silent> ,gl :Extradite<CR>
+
+NeoBundle 'gregsexton/gitv'
+nmap <leader>gv :Gitv<cr>
 
 NeoBundle 'Lokaltog/vim-easymotion'
 map <Leader> <Plug>(easymotion-prefix)
@@ -103,7 +116,7 @@ imap <silent> <C-e> <Esc>:NERDTreeToggle<CR>
 cmap <silent> <C-e> <C-u>:NERDTreeToggle<CR>
 let g:NERDTreeIgnore=['\.clean$', '\.swp$', '\.bak$', '\~$']
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 NeoBundle 'jeetsukumaran/vim-buffergator'
 
@@ -238,6 +251,8 @@ let g:SimpleJsIndenter_BriefMode = 2
 "for coffee
 NeoBundle 'kchmck/vim-coffee-script'
 au BufRead,BufNewFile,BufReadPre *.coffee   set filetype=coffee
+
+NeoBundle 'rking/ag.vim'
 
 set encoding=utf-8
 filetype plugin indent on     " required!
