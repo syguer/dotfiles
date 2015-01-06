@@ -58,6 +58,8 @@ NeoBundle 'digitaltoad/vim-jade'
 NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'vim-scripts/matchparenpp'
 NeoBundle 'thinca/vim-qfreplace'
+NeoBundle 'tpope/vim-abolish'
+NeoBundle 'ujihisa/neco-look'
 
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
