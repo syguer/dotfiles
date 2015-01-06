@@ -142,12 +142,17 @@ NeoBundle 'Shougo/neocomplete'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'honza/vim-snippets'
+
 let g:acp_enableAtStartup = 0
 let g:neocomplete#enable_at_startup = 1
+" let g:neocomplete#disable_auto_complete = 1
+let g:neocomplete#enable_fuzzy_completion = 0
 let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#manual_completion_start_length = 4
+let g:neocomplete#auto_completion_start_length = 4
 let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#max_list = 10
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
   "return neocomplete#close_popup() . "\<CR>"
@@ -155,7 +160,8 @@ function! s:my_cr_function()
   return pumvisible() ? neocomplete#close_popup() : "\<CR>"
 endfunction
 
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><TAB>  neocomplete#start_manual_complete()
 
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
