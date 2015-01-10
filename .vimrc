@@ -60,11 +60,14 @@ NeoBundle 'vim-scripts/matchparenpp'
 NeoBundle 'thinca/vim-qfreplace'
 NeoBundle 'tpope/vim-abolish'
 NeoBundle 'ujihisa/neco-look'
+NeoBundle 'rking/ag.vim'
 
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 cnoremap <C-f> <Right>
 cnoremap <C-b> <Left>
+nnoremap <C-h> :noh<CR>
+nnoremap <C-p> obinding.pry<ESC>
 
 NeoBundle 'tpope/vim-fugitive'
 nnoremap <silent> ,gs :Gstatus<CR>
@@ -90,8 +93,6 @@ nnoremap <silent> ,sh :VimShell<CR>
 NeoBundle 'airblade/vim-gitgutter'
 nnoremap <silent> ,gg :<C-u>GitGutterToggle<CR>
 nnoremap <silent> ,gh :<C-u>GitGutterLineHighlightsToggle<CR>
-
-nnoremap <silent> ,bp obinding.pry<ESC>
 
 NeoBundle 'thinca/vim-quickrun'
 let g:quickrun_config = {}
@@ -147,7 +148,7 @@ NeoBundle 'honza/vim-snippets'
 
 let g:acp_enableAtStartup = 0
 let g:neocomplete#enable_at_startup = 1
-" let g:neocomplete#disable_auto_complete = 1
+let g:neocomplete#disable_auto_complete = 1
 let g:neocomplete#enable_fuzzy_completion = 0
 let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#manual_completion_start_length = 4
@@ -162,8 +163,8 @@ function! s:my_cr_function()
   return pumvisible() ? neocomplete#close_popup() : "\<CR>"
 endfunction
 
-" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><TAB>  neocomplete#start_manual_complete()
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><C-n>  neocomplete#start_manual_complete()
 
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
@@ -209,7 +210,8 @@ NeoBundle 'osyo-manga/vim-textobj-multiblock'
 NeoBundle 'deris/vim-textobj-enclosedsyntax'
 NeoBundle 'thinca/vim-textobj-function-javascript'
 NeoBundle 'osyo-manga/vim-textobj-multitextobj'
-
+NeoBundle 'h1mesuke/textobj-wiw'
+NeoBundle 'thinca/vim-textobj-between'
 map _  <Plug>(operator-replace)
 
 omap ab <Plug>(textobj-multiblock-a)
@@ -260,7 +262,10 @@ let g:SimpleJsIndenter_BriefMode = 2
 NeoBundle 'kchmck/vim-coffee-script'
 au BufRead,BufNewFile,BufReadPre *.coffee   set filetype=coffee
 
-NeoBundle 'rking/ag.vim'
+"for golang
+NeoBundle 'vim-jp/vim-go-extra'
+exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
+au FileType go setlocal sw=4 ts=4 sts=4 noet
 
 set encoding=utf-8
 filetype plugin indent on     " required!

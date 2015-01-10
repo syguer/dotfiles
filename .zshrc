@@ -93,4 +93,4 @@ export GOPATH=~/.golang
 PATH=$GOPATH/bin:$PATH
 export PS1='\[\033[33m\]\u@MacMini\[\033[00m\]:\[\033[36m\]\w\[\033[35m\]$(__git_ps1)\[\033[00m\]\$ '
 
-[ -f ~/.aliase ]; source ~/.aliases
+[ -f ~/.aliase ] && source ~/.aliases
