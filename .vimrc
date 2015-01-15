@@ -205,14 +205,14 @@ NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'sgur/vim-textobj-parameter'
 NeoBundle 'rhysd/vim-textobj-ruby'
 NeoBundle 'kana/vim-textobj-indent'
-NeoBundle 'kana/vim-textobj-function'
+" NeoBundle 'kana/vim-textobj-function'
 NeoBundle 'osyo-manga/vim-textobj-multiblock'
 NeoBundle 'deris/vim-textobj-enclosedsyntax'
-NeoBundle 'thinca/vim-textobj-function-javascript'
+" NeoBundle 'thinca/vim-textobj-function-javascript'
 NeoBundle 'osyo-manga/vim-textobj-multitextobj'
-NeoBundle 'h1mesuke/textobj-wiw'
+NeoBundle 'lucapette/vim-textobj-underscore'
 NeoBundle 'thinca/vim-textobj-between'
-map _  <Plug>(operator-replace)
+" map _  <Plug>(operator-replace)
 
 omap ab <Plug>(textobj-multiblock-a)
 omap ib <Plug>(textobj-multiblock-i)
