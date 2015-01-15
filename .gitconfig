@@ -29,6 +29,7 @@
   feu = fetch upstream
   mud = merge upstream/develop
   rmv = remote -v
+  pud = pull upstream develop
 [pager]
   log = diff-highlight | less
   show = diff-highlight | less
