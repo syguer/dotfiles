@@ -4,7 +4,7 @@
 [push]
 	default = current
 [core]
-	editor = /usr/local/bin/vim
+	editor = vim
 	excludesfile = ~/dotfiles/.gitignore
 [color]
 	ui = true
@@ -30,8 +30,9 @@
   mud = merge upstream/develop
   rmv = remote -v
   pud = pull upstream develop
+  cl  = clone
 [pager]
-  log = diff-highlight | less
+  log  = diff-highlight | less
   show = diff-highlight | less
   diff = diff-highlight | less
 [diff]

@@ -36,9 +36,9 @@ syntax off
 filetype off
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim
-  call neobundle#rc(expand('~/.vim/bundle/'))
 endif
 
+call neobundle#begin(expand('~/.vim/bundle/'))
 runtime macros/matchit.vim
 
 augroup HighlightTrailingSpaces
@@ -51,7 +51,7 @@ augroup END
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'scrooloose/syntastic'
-NeoBundle "Townk/vim-autoclose"
+" NeoBundle "Townk/vim-autoclose"
 NeoBundle 'tpope/vim-markdown'
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'digitaltoad/vim-jade'
@@ -60,14 +60,29 @@ NeoBundle 'vim-scripts/matchparenpp'
 NeoBundle 'thinca/vim-qfreplace'
 NeoBundle 'tpope/vim-abolish'
 NeoBundle 'ujihisa/neco-look'
-NeoBundle 'rking/ag.vim'
 
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 cnoremap <C-f> <Right>
 cnoremap <C-b> <Left>
+nnoremap j gj
+nnoremap k gk
+nnoremap gj j
+nnoremap gk k
+
 nnoremap <C-h> :noh<CR>
 nnoremap <C-p> obinding.pry<ESC>
+
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/neomru.vim'
+nnoremap [unite]    <Nop>
+nmap     <Space>u [unite]
+nnoremap <silent> [unite]b   :<C-u>Unite buffer<CR>
+nnoremap <silent> [unite]f   :<C-u>Unite file<CR>
+nnoremap <silent> [unite]u   :<C-u>Unite file_mru<CR>
+
+NeoBundle 'rking/ag.vim'
+let g:agprg="ag --column"
 
 NeoBundle 'tpope/vim-fugitive'
 nnoremap <silent> ,gs :Gstatus<CR>
@@ -85,7 +100,7 @@ map <Leader> <Plug>(easymotion-prefix)
 
 NeoBundle 'Shougo/vimproc.vim' , {
       \ 'build' : {
-      \     'mac' : 'make -f make_mac.mak'},
+      \     'linux' : 'make'},
 \}
 NeoBundle 'Shougo/vimshell.vim'
 nnoremap <silent> ,sh :VimShell<CR>
@@ -122,6 +137,7 @@ autocmd StdinReadPre * let s:std_in=1
 " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 NeoBundle 'jeetsukumaran/vim-buffergator'
+let g:buffergator_viewport_split_policy = "B"
 
 NeoBundle "majutsushi/tagbar"
 nmap <silent> ,t :TagbarToggle<CR>
@@ -267,6 +283,7 @@ NeoBundle 'vim-jp/vim-go-extra'
 exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
 au FileType go setlocal sw=4 ts=4 sts=4 noet
 
+call neobundle#end()
 set encoding=utf-8
 filetype plugin indent on     " required!
 filetype indent on
