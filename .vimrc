@@ -72,6 +72,7 @@ nnoremap gk k
 
 nnoremap <C-h> :noh<CR>
 nnoremap <C-p> obinding.pry<ESC>
+nnoremap ;; A;<ESC>
 
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim'
