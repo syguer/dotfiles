@@ -57,9 +57,11 @@ NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'digitaltoad/vim-jade'
 NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'vim-scripts/matchparenpp'
-NeoBundle 'thinca/vim-qfreplace'
 NeoBundle 'tpope/vim-abolish'
 NeoBundle 'ujihisa/neco-look'
+NeoBundle 'tpope/vim-unimpaired'
+NeoBundle 'tpope/vim-repeat'
+NeoBundle 'tpope/vim-speeddating'
 
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
@@ -70,9 +72,15 @@ nnoremap k gk
 nnoremap gj j
 nnoremap gk k
 
+nnoremap Q :ccl<CR>
 nnoremap <C-h> :noh<CR>
 nnoremap <C-p> obinding.pry<ESC>
-nnoremap ;; A;<ESC>
+
+nnoremap <Leader>; A;<ESC>
+nnoremap <Leader>, A,<ESC>
+
+NeoBundle 'thinca/vim-qfreplace'
+nnoremap <Leader>Q :Qfreplace<ESC>
 
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim'
@@ -208,6 +216,9 @@ xnoremap <silent> a: :Alignta  01 :<CR>
 xmap <silent><expr> as mode() !=# 'v' ? ':Alignta \S\+'."\<CR>" : 'as'
 xnoremap al :Alignta<Space>
 
+NeoBundle 'junegunn/vim-easy-align'
+vmap <Enter> <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 NeoBundle 'tomtom/tcomment_vim'
 

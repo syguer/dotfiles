@@ -31,7 +31,9 @@ alias be='bundle exec'
 
 # rails
 alias ra='bundle exec rails'
-alias sp='bundle exec rspec spec'
+alias rp='rubocop'
+alias rpa='rubocop -a'
+alias sp='bundle exec rspec'
 alias gu='bundle exec guard start'
 alias mi='bundle exec rake db:migrate'
 alias ro='bundle exec rake db:rollback'
@@ -42,7 +44,8 @@ alias rroute='bundle exec rake routes | peco'
 
 [[ -s /Users/keisuke/.nvm/nvm.sh ]] && . /Users/keisuke/.nvm/nvm.sh ]]
 
-PATH=$(brew --prefix)/bin:$HOME/.composer/vendor/bin/:$HOME/.rbenv/bin:$PATH
+PATH=/usr/local/bin:$PATH
+#PATH=$(brew --prefix)/bin:$HOME/.composer/vendor/bin/:$HOME/.rbenv/bin:$PATH
 eval "$(rbenv init -)"
 
 # using peco
@@ -96,5 +99,5 @@ export PS1='\[\033[33m\]\u@MacMini\[\033[00m\]:\[\033[36m\]\w\[\033[35m\]$(__git
 [ -f ~/.aliases ] && source ~/.aliases
 
 # gobrew
-export PATH="$HOME/.gobrew/bin:$PATH"
-eval "$(gobrew init -)"
+#export PATH="$HOME/.gobrew/bin:$PATH"
+#eval "$(gobrew init -)"
