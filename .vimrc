@@ -62,6 +62,7 @@ NeoBundle 'ujihisa/neco-look'
 NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-speeddating'
+NeoBundle 'kana/vim-tabpagecd'
 
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
@@ -74,6 +75,7 @@ nnoremap gk k
 
 nnoremap Q :ccl<CR>
 nnoremap <C-h> :noh<CR>
+nnoremap <C-=> vii=<CR>
 nnoremap <C-p> obinding.pry<ESC>
 
 nnoremap <Leader>; A;<ESC>
@@ -84,11 +86,16 @@ nnoremap <Leader>Q :Qfreplace<ESC>
 
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim'
+NeoBundle 'tsukkee/unite-tag'
 nnoremap [unite]    <Nop>
 nmap     <Space>u [unite]
 nnoremap <silent> [unite]b   :<C-u>Unite buffer<CR>
 nnoremap <silent> [unite]f   :<C-u>Unite file<CR>
 nnoremap <silent> [unite]u   :<C-u>Unite file_mru<CR>
+nnoremap <silent> [unite]y   :<C-u>Unite history/yank<CR>
+nnoremap <silent> [unite]s   :<C-u>Unite source<CR>
+nnoremap <silent> [unite]t   :<C-u>Unite tag<CR>
+let g:unite_source_history_yank_enable = 1
 
 NeoBundle 'rking/ag.vim'
 let g:agprg="ag --column"
@@ -96,7 +103,9 @@ let g:agprg="ag --column"
 NeoBundle 'tpope/vim-fugitive'
 nnoremap <silent> ,gs :Gstatus<CR>
 nnoremap <silent> ,gd :Gdiff<CR>
+nnoremap <silent> ,gb :Gblame<CR>
 nnoremap <silent> ,gpo :Gpush origin<CR>
+nnoremap <silent> ,gco :Git checkout 
 
 NeoBundle 'int3/vim-extradite'
 nnoremap <silent> ,gl :Extradite<CR>

@@ -31,6 +31,9 @@
   rmv = remote -v
   pud = pull upstream develop
   cl  = clone
+  ss  = stash
+  sp  = stash pop
+  sl  = stash list
 [pager]
   log  = diff-highlight | less
   show = diff-highlight | less
