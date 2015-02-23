@@ -1,3 +1,8 @@
+"init all settings
+set all&
+" init autocmd
+autocmd!
+
 set number
 set tabstop=2
 set autoindent
@@ -22,6 +27,12 @@ colorscheme hybrid
 "colorscheme Tomorrow-Night-Eighties
 "colorscheme Tomorrow-Night-Bright
 "set background=dark
+
+augroup source-vimrc
+  autocmd!
+  autocmd BufWritePost *vimrc source $MYVIMRC | set foldmethod=marker
+  autocmd BufWritePost *gvimrc if has('gui_running') source $MYGVIMRC
+augroup END
 
 "save undo
 if has('persistent_undo')
@@ -63,6 +74,7 @@ NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-speeddating'
 NeoBundle 'kana/vim-tabpagecd'
+NeoBundle 'mhinz/vim-startify'
 
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
@@ -80,6 +92,20 @@ nnoremap <C-p> obinding.pry<ESC>
 
 nnoremap <Leader>; A;<ESC>
 nnoremap <Leader>, A,<ESC>
+
+
+noremap @t :call InsertTodo()<CR>
+noremap @f :call InsertFixme()<CR>
+
+function! InsertTodo()
+  let l:module_name = '# TODO: '
+  execute ":normal i" . l:module_name
+endfunction
+
+function! InsertFixme()
+  let l:module_name = '# FIXME: '
+  execute ":normal i" . l:module_name
+endfunction
 
 NeoBundle 'thinca/vim-qfreplace'
 nnoremap <Leader>Q :Qfreplace<ESC>
