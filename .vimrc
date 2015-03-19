@@ -92,6 +92,7 @@ nnoremap <C-p> obinding.pry<ESC>
 
 nnoremap <Leader>; A;<ESC>
 nnoremap <Leader>, A,<ESC>
+nnoremap <silent><CR> i<CR><ESC>
 
 
 noremap @t :call InsertTodo()<CR>
@@ -297,6 +298,12 @@ let g:textobj_multitextobj_textobjects_a = [
 omap amt <Plug>(textobj-multitextobj-a)
 omap imt <Plug>(textobj-multitextobj-i)
 vmap amt <Plug>(textobj-multitextobj-a)
+
+
+omap iF <Plug>(textobj-function-i)
+omap aF <Plug>(textobj-function-a)
+vmap iF <Plug>(textobj-function-i)
+vmap aF <Plug>(textobj-function-a)
 
 "for ruby
 NeoBundle "vim-scripts/ruby-matchit"
