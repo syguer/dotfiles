@@ -28,11 +28,11 @@ colorscheme hybrid
 "colorscheme Tomorrow-Night-Bright
 "set background=dark
 
-augroup source-vimrc
-  autocmd!
-  autocmd BufWritePost *vimrc source $MYVIMRC | set foldmethod=marker
-  autocmd BufWritePost *gvimrc if has('gui_running') source $MYGVIMRC
-augroup END
+" augroup source-vimrc
+"   autocmd!
+"   autocmd BufWritePost *vimrc source $MYVIMRC | set foldmethod=marker
+"   autocmd BufWritePost *gvimrc if has('gui_running') source $MYGVIMRC
+" augroup END
 
 "save undo
 if has('persistent_undo')
@@ -92,8 +92,6 @@ nnoremap <C-p> obinding.pry<ESC>
 
 nnoremap <Leader>; A;<ESC>
 nnoremap <Leader>, A,<ESC>
-nnoremap <silent><CR> i<CR><ESC>
-
 
 noremap @t :call InsertTodo()<CR>
 noremap @f :call InsertFixme()<CR>

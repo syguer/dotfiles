@@ -28,12 +28,16 @@ alias vima='vim ~/.aliases'
 alias dot='cd ~/dotfiles'
 
 # ruby
+alias b='bundle'
 alias be='bundle exec'
 
 # rails
 alias ra='bundle exec rails'
 alias rp='rubocop'
 alias rpa='rubocop -a'
+alias s='bundle exec rails s'
+alias c='bundle exec rails c'
+alias ss='spring stop'
 alias sp='bundle exec rspec'
 alias gu='bundle exec guard start'
 alias mi='bundle exec rake db:migrate'
