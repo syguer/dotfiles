@@ -76,6 +76,10 @@ NeoBundle 'tpope/vim-speeddating'
 NeoBundle 'kana/vim-tabpagecd'
 NeoBundle 'mhinz/vim-startify'
 
+NeoBundle 'tomtom/tlib_vim'
+NeoBundle 'MarcWeber/vim-addon-mw-utils'
+NeoBundle "garbas/vim-snipmate"
+
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 cnoremap <C-f> <Right>
