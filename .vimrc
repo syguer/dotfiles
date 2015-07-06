@@ -75,7 +75,6 @@ NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-speeddating'
 NeoBundle 'kana/vim-tabpagecd'
 NeoBundle 'mhinz/vim-startify'
-
 NeoBundle 'tomtom/tlib_vim'
 NeoBundle 'MarcWeber/vim-addon-mw-utils'
 NeoBundle "garbas/vim-snipmate"
@@ -92,13 +91,19 @@ nnoremap gk k
 nnoremap Q :ccl<CR>
 nnoremap <C-h> :noh<CR>
 nnoremap <C-=> vii=<CR>
-nnoremap <C-p> obinding.pry<ESC>
+nnoremap <C-n> obinding.pry<ESC>
 
 nnoremap <Leader>; A;<ESC>
 nnoremap <Leader>, A,<ESC>
 
 noremap @t :call InsertTodo()<CR>
 noremap @f :call InsertFixme()<CR>
+
+NeoBundle "ctrlpvim/ctrlp.vim"
+let g:ctrlp_extensions = ['tag', 'mixed']
+
+NeoBundle "vim-scripts/vim-auto-save"
+let g:auto_save = 1
 
 function! InsertTodo()
   let l:module_name = '# TODO: '
@@ -311,6 +316,7 @@ vmap aF <Plug>(textobj-function-a)
 NeoBundle "vim-scripts/ruby-matchit"
 NeoBundle "tpope/vim-endwise"
 NeoBundle 'AndrewRadev/switch.vim'
+NeoBundle 'ecomba/vim-ruby-refactoring'
 nnoremap - :Switch<cr>
 
 NeoBundle 'tpope/vim-rails'
