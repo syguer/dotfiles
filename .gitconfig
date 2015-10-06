@@ -28,6 +28,9 @@
   fe  = fetch
   feu = fetch upstream
   mud = merge upstream/develop
+  mur = merge upstream/release
+  pud = pull upstream develop
+  pur = pull upstream release
   rmv = remote -v
   pud = pull upstream develop
   cl  = clone

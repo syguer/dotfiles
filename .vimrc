@@ -74,10 +74,14 @@ NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-speeddating'
 NeoBundle 'kana/vim-tabpagecd'
-NeoBundle 'mhinz/vim-startify'
+" NeoBundle 'mhinz/vim-startify'
 NeoBundle 'tomtom/tlib_vim'
 NeoBundle 'MarcWeber/vim-addon-mw-utils'
 NeoBundle "garbas/vim-snipmate"
+NeoBundle 'KabbAmine/vCoolor.vim'
+NeoBundle 'slim-template/vim-slim'
+
+NeoBundle 'ap/vim-css-color'
 
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
@@ -92,18 +96,24 @@ nnoremap Q :ccl<CR>
 nnoremap <C-h> :noh<CR>
 nnoremap <C-=> vii=<CR>
 nnoremap <C-n> obinding.pry<ESC>
+nnoremap <C-\><C-\> i\| <ESC>
 
 nnoremap <Leader>; A;<ESC>
 nnoremap <Leader>, A,<ESC>
 
 noremap @t :call InsertTodo()<CR>
 noremap @f :call InsertFixme()<CR>
+noremap @s :call InsertUseStrict()<CR>
 
 NeoBundle "ctrlpvim/ctrlp.vim"
-let g:ctrlp_extensions = ['tag', 'mixed']
+let g:ctrlp_cmd = 'CtrlPLastMode'
+let g:ctrlp_extensions = ['mixed']
+let g:ctrlp_clear_cache_on_exit = 0
 
 NeoBundle "vim-scripts/vim-auto-save"
 let g:auto_save = 1
+let g:auto_save_in_insert_mode = 0
+" let g:auto_save_no_updatetime = 1
 
 function! InsertTodo()
   let l:module_name = '# TODO: '
@@ -113,6 +123,11 @@ endfunction
 function! InsertFixme()
   let l:module_name = '# FIXME: '
   execute ":normal i" . l:module_name
+endfunction
+
+function! InsertUseStrict()
+  let l:str = "'use strict';"
+  execute ":normal ggO" . l:str
 endfunction
 
 NeoBundle 'thinca/vim-qfreplace'
@@ -311,6 +326,9 @@ omap iF <Plug>(textobj-function-i)
 omap aF <Plug>(textobj-function-a)
 vmap iF <Plug>(textobj-function-i)
 vmap aF <Plug>(textobj-function-a)
+
+NeoBundle 'elzr/vim-json'
+let g:vim_json_syntax_conceal = 0
 
 "for ruby
 NeoBundle "vim-scripts/ruby-matchit"

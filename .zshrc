@@ -29,6 +29,7 @@ alias dot='cd ~/dotfiles'
 
 # ruby
 alias b='bundle'
+alias bi='bundle install -j4'
 alias be='bundle exec'
 
 # rails
@@ -46,11 +47,12 @@ alias gmi='bundle exec rails g migration'
 alias con='bundle exec rails c'
 alias seed='bundle exec rake db:seed'
 alias rroute='bundle exec rake routes | peco'
+alias gc='gcloud'
 
 [[ -s /Users/keisuke/.nvm/nvm.sh ]] && . /Users/keisuke/.nvm/nvm.sh ]]
 
 PATH=/usr/local/bin:$PATH
-#PATH=$(brew --prefix)/bin:$HOME/.composer/vendor/bin/:$HOME/.rbenv/bin:$PATH
+PATH=$(brew --prefix)/bin:$HOME/.composer/vendor/bin/:$HOME/.rbenv/bin:$PATH
 eval "$(rbenv init -)"
 
 # using peco
