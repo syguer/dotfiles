@@ -27,16 +27,20 @@
   rh  = reset --hard
   fe  = fetch
   feu = fetch upstream
+  pu  = pull
   mud = merge upstream/develop
   mur = merge upstream/release
-  pud = pull upstream develop
-  pur = pull upstream release
+  pud = pull --rebase upstream develop
+  pur = pull --rebase upstream release
   rmv = remote -v
   pud = pull upstream develop
   cl  = clone
   ss  = stash
   sp  = stash pop
   sl  = stash list
+  wt  = worktree
+  wta = worktree add
+  nb = new-branch
 [pager]
   log  = diff-highlight | less
   show = diff-highlight | less

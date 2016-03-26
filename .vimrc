@@ -19,14 +19,16 @@ set laststatus=2
 set nobackup
 set noswapfile
 set backspace=indent,eol,start
+set scrolloff=5
 
 "colorscheme molokai
-"colorscheme jellybeans
+" colorscheme jellybeans
 colorscheme hybrid
+" colorscheme PaperColor
 "colorscheme Tomorrow-Night
 "colorscheme Tomorrow-Night-Eighties
 "colorscheme Tomorrow-Night-Bright
-"set background=dark
+" set background=dark
 
 " augroup source-vimrc
 "   autocmd!
@@ -96,23 +98,27 @@ nnoremap Q :ccl<CR>
 nnoremap <C-h> :noh<CR>
 nnoremap <C-=> vii=<CR>
 nnoremap <C-n> obinding.pry<ESC>
-nnoremap <C-\><C-\> i\| <ESC>
+nnoremap <C-\><C-\> ^i\| <ESC>
 
 nnoremap <Leader>; A;<ESC>
 nnoremap <Leader>, A,<ESC>
+
+nnoremap <Space>[ ^<ESC>
+nnoremap <Space>] $<ESC>
+nnoremap <Space>c :echo @%<CR>
 
 noremap @t :call InsertTodo()<CR>
 noremap @f :call InsertFixme()<CR>
 noremap @s :call InsertUseStrict()<CR>
 
 NeoBundle "ctrlpvim/ctrlp.vim"
-let g:ctrlp_cmd = 'CtrlPLastMode'
+let g:ctrlp_cmd = 'CtrlPMRU'
 let g:ctrlp_extensions = ['mixed']
 let g:ctrlp_clear_cache_on_exit = 0
 
-NeoBundle "vim-scripts/vim-auto-save"
-let g:auto_save = 1
-let g:auto_save_in_insert_mode = 0
+" NeoBundle "vim-scripts/vim-auto-save"
+" let g:auto_save = 1
+" let g:auto_save_in_insert_mode = 0
 " let g:auto_save_no_updatetime = 1
 
 function! InsertTodo()
@@ -147,14 +153,14 @@ nnoremap <silent> [unite]t   :<C-u>Unite tag<CR>
 let g:unite_source_history_yank_enable = 1
 
 NeoBundle 'rking/ag.vim'
-let g:agprg="ag --column"
+let g:ag_prg="ag --column"
 
 NeoBundle 'tpope/vim-fugitive'
 nnoremap <silent> ,gs :Gstatus<CR>
 nnoremap <silent> ,gd :Gdiff<CR>
 nnoremap <silent> ,gb :Gblame<CR>
 nnoremap <silent> ,gpo :Gpush origin<CR>
-nnoremap <silent> ,gco :Git checkout 
+nnoremap <silent> ,gco :Git checkout
 
 NeoBundle 'int3/vim-extradite'
 nnoremap <silent> ,gl :Extradite<CR>
@@ -191,7 +197,7 @@ let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 
 ""for php
-autocmd FileType php,ctp :set dictionary=~/.vim/dict/php.dict
+" autocmd FileType php,ctp :set dictionary=~/.vim/dict/php.dict
 
 NeoBundle 'scrooloose/nerdtree.git'
 nmap <silent> <C-e>      :NERDTreeToggle<CR>
@@ -225,40 +231,38 @@ let g:SrcExpl_jumpKey = "<ENTER>"
 let g:SrcExpl_gobackKey = "<SPACE>"
 
 NeoBundle 'Shougo/neocomplete'
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'honza/vim-snippets'
-
-let g:acp_enableAtStartup = 0
+let g:acp_enableAtStartup = 1
 let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#disable_auto_complete = 1
+let g:neocomplete#disable_auto_complete = 0
 let g:neocomplete#enable_fuzzy_completion = 0
 let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#manual_completion_start_length = 4
-let g:neocomplete#auto_completion_start_length = 4
-let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#manual_completion_start_length = 2
+let g:neocomplete#auto_completion_start_length = 2
+let g:neocomplete#sources#syntax#min_keyword_length = 2
 let g:neocomplete#max_list = 10
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
-  "return neocomplete#close_popup() . "\<CR>"
-  " For no inserting <CR> key.
   return pumvisible() ? neocomplete#close_popup() : "\<CR>"
 endfunction
 
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><C-n>  neocomplete#start_manual_complete()
+inoremap <expr><C-n> neocomplete#start_manual_complete()
 
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup()
+
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 
-
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'honza/vim-snippets'
 let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+let g:neosnippet#enable_snipmate_compatibility = 1
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
@@ -266,6 +270,7 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 NeoBundle 'Yggdroot/indentLine'
 let g:indentLine_color_term = 240
 let g:indentLine_char = '¦'
+" let g:indentLine_faster = 1
 
 NeoBundle 'h1mesuke/vim-alignta'
 set ambiwidth=double
@@ -329,6 +334,14 @@ vmap aF <Plug>(textobj-function-a)
 
 NeoBundle 'elzr/vim-json'
 let g:vim_json_syntax_conceal = 0
+
+
+" ref
+NeoBundle "thinca/vim-ref"
+NeoBundle "yuku-t/vim-ref-ri"
+
+NeoBundle 'soramugi/auto-ctags.vim'
+let g:auto_ctags = 1
 
 "for ruby
 NeoBundle "vim-scripts/ruby-matchit"
