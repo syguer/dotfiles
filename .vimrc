@@ -20,6 +20,7 @@ set nobackup
 set noswapfile
 set backspace=indent,eol,start
 set scrolloff=5
+set iskeyword+=-
 
 "colorscheme molokai
 " colorscheme jellybeans
@@ -63,7 +64,6 @@ augroup END
 " originalrepos on github
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'tpope/vim-surround'
-NeoBundle 'scrooloose/syntastic'
 " NeoBundle "Townk/vim-autoclose"
 NeoBundle 'tpope/vim-markdown'
 NeoBundle 'tyru/open-browser.vim'
@@ -89,6 +89,8 @@ cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 cnoremap <C-f> <Right>
 cnoremap <C-b> <Left>
+cnoremap <C-e> <End>
+cnoremap <C-a> <Home>
 nnoremap j gj
 nnoremap k gk
 nnoremap gj j
@@ -111,10 +113,18 @@ noremap @t :call InsertTodo()<CR>
 noremap @f :call InsertFixme()<CR>
 noremap @s :call InsertUseStrict()<CR>
 
+NeoBundle 'scrooloose/syntastic'
+let g:syntastic_scss_checkers = []
+
+" CtrlP
 NeoBundle "ctrlpvim/ctrlp.vim"
-let g:ctrlp_cmd = 'CtrlPMRU'
+let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_extensions = ['mixed']
 let g:ctrlp_clear_cache_on_exit = 0
+
+NeoBundle 'nixprime/cpsm'
+let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
+let g:ctrlp_user_command = 'files -a %s'
 
 " NeoBundle "vim-scripts/vim-auto-save"
 " let g:auto_save = 1
@@ -204,7 +214,6 @@ nmap <silent> <C-e>      :NERDTreeToggle<CR>
 vmap <silent> <C-e> <Esc>:NERDTreeToggle<CR>
 omap <silent> <C-e>      :NERDTreeToggle<CR>
 imap <silent> <C-e> <Esc>:NERDTreeToggle<CR>
-cmap <silent> <C-e> <C-u>:NERDTreeToggle<CR>
 let g:NERDTreeIgnore=['\.clean$', '\.swp$', '\.bak$', '\~$']
 autocmd StdinReadPre * let s:std_in=1
 " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
