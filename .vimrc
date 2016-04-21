@@ -76,13 +76,12 @@ NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-speeddating'
 NeoBundle 'kana/vim-tabpagecd'
-" NeoBundle 'mhinz/vim-startify'
 NeoBundle 'tomtom/tlib_vim'
 NeoBundle 'MarcWeber/vim-addon-mw-utils'
 NeoBundle "garbas/vim-snipmate"
 NeoBundle 'KabbAmine/vCoolor.vim'
 NeoBundle 'slim-template/vim-slim'
-
+NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'ap/vim-css-color'
 
 cnoremap <C-p> <Up>
@@ -113,24 +112,6 @@ noremap @t :call InsertTodo()<CR>
 noremap @f :call InsertFixme()<CR>
 noremap @s :call InsertUseStrict()<CR>
 
-NeoBundle 'scrooloose/syntastic'
-let g:syntastic_scss_checkers = []
-
-" CtrlP
-NeoBundle "ctrlpvim/ctrlp.vim"
-let g:ctrlp_cmd = 'CtrlPMixed'
-let g:ctrlp_extensions = ['mixed']
-let g:ctrlp_clear_cache_on_exit = 0
-
-NeoBundle 'nixprime/cpsm'
-let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
-let g:ctrlp_user_command = 'files -a %s'
-
-" NeoBundle "vim-scripts/vim-auto-save"
-" let g:auto_save = 1
-" let g:auto_save_in_insert_mode = 0
-" let g:auto_save_no_updatetime = 1
-
 function! InsertTodo()
   let l:module_name = '# TODO: '
   execute ":normal i" . l:module_name
@@ -146,21 +127,36 @@ function! InsertUseStrict()
   execute ":normal ggO" . l:str
 endfunction
 
+" NeoBundle 'scrooloose/syntastic'
+" let g:syntastic_scss_checkers = []
+" let g:syntastic_check_on_wq = 0
+
+" CtrlP
+NeoBundle "ctrlpvim/ctrlp.vim"
+let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_extensions = ['mixed']
+let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_mruf_relative = 1
+
+NeoBundle 'nixprime/cpsm'
+let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
+let g:ctrlp_user_command = 'files -a %s'
+
 NeoBundle 'thinca/vim-qfreplace'
 nnoremap <Leader>Q :Qfreplace<ESC>
 
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'tsukkee/unite-tag'
-nnoremap [unite]    <Nop>
-nmap     <Space>u [unite]
-nnoremap <silent> [unite]b   :<C-u>Unite buffer<CR>
-nnoremap <silent> [unite]f   :<C-u>Unite file<CR>
-nnoremap <silent> [unite]u   :<C-u>Unite file_mru<CR>
-nnoremap <silent> [unite]y   :<C-u>Unite history/yank<CR>
-nnoremap <silent> [unite]s   :<C-u>Unite source<CR>
-nnoremap <silent> [unite]t   :<C-u>Unite tag<CR>
-let g:unite_source_history_yank_enable = 1
+" NeoBundle 'Shougo/unite.vim'
+" NeoBundle 'Shougo/neomru.vim'
+" NeoBundle 'tsukkee/unite-tag'
+" nnoremap [unite]    <Nop>
+" nmap     <Space>u [unite]
+" nnoremap <silent> [unite]b   :<C-u>Unite buffer<CR>
+" nnoremap <silent> [unite]f   :<C-u>Unite file<CR>
+" nnoremap <silent> [unite]u   :<C-u>Unite file_mru<CR>
+" nnoremap <silent> [unite]y   :<C-u>Unite history/yank<CR>
+" nnoremap <silent> [unite]s   :<C-u>Unite source<CR>
+" nnoremap <silent> [unite]t   :<C-u>Unite tag<CR>
+" let g:unite_source_history_yank_enable = 1
 
 NeoBundle 'rking/ag.vim'
 let g:ag_prg="ag --column"
@@ -172,15 +168,6 @@ nnoremap <silent> ,gb :Gblame<CR>
 nnoremap <silent> ,gpo :Gpush origin<CR>
 nnoremap <silent> ,gco :Git checkout
 
-NeoBundle 'int3/vim-extradite'
-nnoremap <silent> ,gl :Extradite<CR>
-
-NeoBundle 'gregsexton/gitv'
-nmap <leader>gv :Gitv<cr>
-
-NeoBundle 'Lokaltog/vim-easymotion'
-map <Leader> <Plug>(easymotion-prefix)
-
 NeoBundle 'Shougo/vimproc.vim' , {
       \ 'build' : {
       \     'linux' : 'make'},
@@ -189,8 +176,8 @@ NeoBundle 'Shougo/vimshell.vim'
 nnoremap <silent> ,sh :VimShell<CR>
 
 NeoBundle 'airblade/vim-gitgutter'
-nnoremap <silent> ,gg :<C-u>GitGutterToggle<CR>
-nnoremap <silent> ,gh :<C-u>GitGutterLineHighlightsToggle<CR>
+let g:gitgutter_realtime = 0
+nnoremap ,h :GitGutterLineHighlightsToggle<CR>
 
 NeoBundle 'thinca/vim-quickrun'
 let g:quickrun_config = {}
@@ -206,20 +193,15 @@ let g:airline_left_sep = '▶'
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 
-""for php
-" autocmd FileType php,ctp :set dictionary=~/.vim/dict/php.dict
-
 NeoBundle 'scrooloose/nerdtree.git'
 nmap <silent> <C-e>      :NERDTreeToggle<CR>
 vmap <silent> <C-e> <Esc>:NERDTreeToggle<CR>
 omap <silent> <C-e>      :NERDTreeToggle<CR>
 imap <silent> <C-e> <Esc>:NERDTreeToggle<CR>
 let g:NERDTreeIgnore=['\.clean$', '\.swp$', '\.bak$', '\~$']
+let g:NERDTreeShowHidden=1
 autocmd StdinReadPre * let s:std_in=1
 " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-NeoBundle 'jeetsukumaran/vim-buffergator'
-let g:buffergator_viewport_split_policy = "B"
 
 NeoBundle "majutsushi/tagbar"
 nmap <silent> ,t :TagbarToggle<CR>
@@ -234,10 +216,6 @@ let g:tagbar_type_ruby = {
         \ 'F:singleton methods'
     \ ]
 \ }
-
-map <silent> <F2> :SrcExpl <CR>
-let g:SrcExpl_jumpKey = "<ENTER>"
-let g:SrcExpl_gobackKey = "<SPACE>"
 
 NeoBundle 'Shougo/neocomplete'
 let g:acp_enableAtStartup = 1
@@ -263,6 +241,23 @@ inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup()
 
+if !exists('g:neocomplete#text_mode_filetypes')
+  let g:neocomplete#text_mode_filetypes = {}
+endif
+let g:neocomplete#text_mode_filetypes = {
+  \ 'markdown': 1,
+  \ 'gitrebase': 1,
+  \ 'gitcommit': 1,
+  \ 'text': 1,
+  \ 'help': 1,
+  \ 'tex': 1,
+  \ 'ruby': 1,
+  \ 'javascript': 1,
+  \ 'coffeescript': 1,
+  \ 'css': 1,
+  \ 'sass': 1
+\ }
+
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
@@ -280,6 +275,7 @@ NeoBundle 'Yggdroot/indentLine'
 let g:indentLine_color_term = 240
 let g:indentLine_char = '¦'
 " let g:indentLine_faster = 1
+let g:indentLine_fileTypeExclude = ['slim', 'haml', 'html']
 
 NeoBundle 'h1mesuke/vim-alignta'
 set ambiwidth=double
@@ -291,8 +287,6 @@ xnoremap al :Alignta<Space>
 NeoBundle 'junegunn/vim-easy-align'
 vmap <Enter> <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
-
-NeoBundle 'tomtom/tcomment_vim'
 
 NeoBundle 't9md/vim-quickhl'
 nmap <Space>m <Plug>(quickhl-manual-this)
@@ -344,19 +338,15 @@ vmap aF <Plug>(textobj-function-a)
 NeoBundle 'elzr/vim-json'
 let g:vim_json_syntax_conceal = 0
 
-
 " ref
 NeoBundle "thinca/vim-ref"
 NeoBundle "yuku-t/vim-ref-ri"
-
-NeoBundle 'soramugi/auto-ctags.vim'
-let g:auto_ctags = 1
 
 "for ruby
 NeoBundle "vim-scripts/ruby-matchit"
 NeoBundle "tpope/vim-endwise"
 NeoBundle 'AndrewRadev/switch.vim'
-NeoBundle 'ecomba/vim-ruby-refactoring'
+" NeoBundle 'ecomba/vim-ruby-refactoring'
 nnoremap - :Switch<cr>
 
 NeoBundle 'tpope/vim-rails'
@@ -384,6 +374,9 @@ au BufRead,BufNewFile,BufReadPre *.coffee   set filetype=coffee
 NeoBundle 'vim-jp/vim-go-extra'
 exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
 au FileType go setlocal sw=4 ts=4 sts=4 noet
+
+""for php
+" autocmd FileType php,ctp :set dictionary=~/.vim/dict/php.dict
 
 call neobundle#end()
 set encoding=utf-8
