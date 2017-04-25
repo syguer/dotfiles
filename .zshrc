@@ -1,5 +1,6 @@
 # Created by newuser for 5.0.2
 LANG=ja_JP.UTF-8
+export LC_ALL=ja_JP.UTF-8
 
 # 履歴
 export HISTFILE=${HOME}/.zsh_history
@@ -16,6 +17,7 @@ setopt list_packed
 
 # aliases
 alias ll="ls -alG"
+alias git=hub
 alias g=git
 alias t=tmux
 alias v=vim

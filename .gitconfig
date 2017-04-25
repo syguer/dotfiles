@@ -47,3 +47,4 @@
   diff = diff-highlight | less
 [diff]
   algorithm = histogram
+  tool = vimdiff

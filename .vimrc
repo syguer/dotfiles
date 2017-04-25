@@ -21,6 +21,7 @@ set noswapfile
 set backspace=indent,eol,start
 set scrolloff=5
 set iskeyword+=-
+set ambiwidth=double
 
 "colorscheme molokai
 " colorscheme jellybeans
@@ -98,8 +99,11 @@ nnoremap gk k
 nnoremap Q :ccl<CR>
 nnoremap <C-h> :noh<CR>
 nnoremap <C-=> vii=<CR>
-nnoremap <C-n> obinding.pry<ESC>
+nnoremap <C-n> orequire 'pry';binding.pry<ESC>
 nnoremap <C-\><C-\> ^i\| <ESC>
+
+nnoremap <C-t>n :tabnew<ESC>
+nnoremap <C-t>w :tabclose<ESC>
 
 nnoremap <Leader>; A;<ESC>
 nnoremap <Leader>, A,<ESC>
@@ -111,6 +115,7 @@ nnoremap <Space>c :echo @%<CR>
 noremap @t :call InsertTodo()<CR>
 noremap @f :call InsertFixme()<CR>
 noremap @s :call InsertUseStrict()<CR>
+noremap <Leader>s :%s/\s\+$//ge<CR>
 
 function! InsertTodo()
   let l:module_name = '# TODO: '
@@ -133,10 +138,15 @@ endfunction
 
 " CtrlP
 NeoBundle "ctrlpvim/ctrlp.vim"
-let g:ctrlp_cmd = 'CtrlPMixed'
-let g:ctrlp_extensions = ['mixed']
+let g:ctrlp_cmd = 'CtrlPMRU'
+let g:ctrlp_extensions = ['tag', 'mixed', 'line']
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_mruf_relative = 1
+let g:ctrlp_max_files = 0
+" let g:ctrlp_custom_ignore = {
+"   \ 'dir':  '\v[\/](\.(git|hg|svn)|(tmp|vendor))$',
+"   \ 'file': '\v\.(png|jpg|xlsx|pdf)$',
+"   \ }
 
 NeoBundle 'nixprime/cpsm'
 let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
@@ -217,72 +227,72 @@ let g:tagbar_type_ruby = {
     \ ]
 \ }
 
-NeoBundle 'Shougo/neocomplete'
-let g:acp_enableAtStartup = 1
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#disable_auto_complete = 0
-let g:neocomplete#enable_fuzzy_completion = 0
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#manual_completion_start_length = 2
-let g:neocomplete#auto_completion_start_length = 2
-let g:neocomplete#sources#syntax#min_keyword_length = 2
-let g:neocomplete#max_list = 10
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-endfunction
+" NeoBundle 'Shougo/neocomplete'
+" let g:acp_enableAtStartup = 1
+" let g:neocomplete#enable_at_startup = 1
+" let g:neocomplete#disable_auto_complete = 0
+" let g:neocomplete#enable_fuzzy_completion = 0
+" let g:neocomplete#enable_smart_case = 1
+" let g:neocomplete#manual_completion_start_length = 2
+" let g:neocomplete#auto_completion_start_length = 2
+" let g:neocomplete#sources#syntax#min_keyword_length = 2
+" let g:neocomplete#max_list = 10
+" let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+" inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+" function! s:my_cr_function()
+"   return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+" endfunction
+"
+" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" inoremap <expr><C-n> neocomplete#start_manual_complete()
+"
+" inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+" inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" inoremap <expr><C-y>  neocomplete#close_popup()
+" inoremap <expr><C-e>  neocomplete#cancel_popup()
 
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><C-n> neocomplete#start_manual_complete()
+" if !exists('g:neocomplete#text_mode_filetypes')
+"   let g:neocomplete#text_mode_filetypes = {}
+" endif
+" let g:neocomplete#text_mode_filetypes = {
+"   \ 'markdown': 1,
+"   \ 'gitrebase': 1,
+"   \ 'gitcommit': 1,
+"   \ 'text': 1,
+"   \ 'help': 1,
+"   \ 'tex': 1,
+"   \ 'ruby': 1,
+"   \ 'javascript': 1,
+"   \ 'coffeescript': 1,
+"   \ 'css': 1,
+"   \ 'sass': 1
+" \ }
+"
+" autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+" autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplete#close_popup()
-inoremap <expr><C-e>  neocomplete#cancel_popup()
+" NeoBundle 'Shougo/neosnippet'
+" NeoBundle 'Shougo/neosnippet-snippets'
+" NeoBundle 'honza/vim-snippets'
+" let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+" let g:neosnippet#enable_snipmate_compatibility = 1
+" imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+" smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+" xmap <C-k>     <Plug>(neosnippet_expand_target)
 
-if !exists('g:neocomplete#text_mode_filetypes')
-  let g:neocomplete#text_mode_filetypes = {}
-endif
-let g:neocomplete#text_mode_filetypes = {
-  \ 'markdown': 1,
-  \ 'gitrebase': 1,
-  \ 'gitcommit': 1,
-  \ 'text': 1,
-  \ 'help': 1,
-  \ 'tex': 1,
-  \ 'ruby': 1,
-  \ 'javascript': 1,
-  \ 'coffeescript': 1,
-  \ 'css': 1,
-  \ 'sass': 1
-\ }
+" NeoBundle 'Yggdroot/indentLine'
+" let g:indentLine_color_term = 240
+" let g:indentLine_char = '¦'
+" " let g:indentLine_faster = 1
+" let g:indentLine_fileTypeExclude = ['slim', 'haml', 'html']
 
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'honza/vim-snippets'
-let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
-let g:neosnippet#enable_snipmate_compatibility = 1
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-NeoBundle 'Yggdroot/indentLine'
-let g:indentLine_color_term = 240
-let g:indentLine_char = '¦'
-" let g:indentLine_faster = 1
-let g:indentLine_fileTypeExclude = ['slim', 'haml', 'html']
-
-NeoBundle 'h1mesuke/vim-alignta'
-set ambiwidth=double
-xnoremap <silent> A  :Alignta =>\=<CR>
-xnoremap <silent> a: :Alignta  01 :<CR>
-xmap <silent><expr> as mode() !=# 'v' ? ':Alignta \S\+'."\<CR>" : 'as'
-xnoremap al :Alignta<Space>
+" NeoBundle 'h1mesuke/vim-alignta'
+" set ambiwidth=double
+" xnoremap <silent> A  :Alignta =>\=<CR>
+" xnoremap <silent> a: :Alignta  01 :<CR>
+" xmap <silent><expr> as mode() !=# 'v' ? ':Alignta \S\+'."\<CR>" : 'as'
+" xnoremap al :Alignta<Space>
 
 NeoBundle 'junegunn/vim-easy-align'
 vmap <Enter> <Plug>(EasyAlign)
