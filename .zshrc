@@ -20,7 +20,7 @@ alias ll="ls -alG"
 alias git=hub
 alias g=git
 alias t=tmux
-alias v=vim
+alias v=nvim
 alias gcc=gcc-4.9
 alias vrc='vim ~/dotfiles/.vimrc'
 alias zrc='vim ~/dotfiles/.zshrc'
@@ -38,6 +38,7 @@ alias be='bundle exec'
 alias ra='bundle exec rails'
 alias rp='rubocop'
 alias rpa='rubocop -a'
+alias bi='bundle install -j4'
 alias s='bundle exec rails s'
 alias c='bundle exec rails c'
 alias ss='bundle ex spring stop'
@@ -108,5 +109,5 @@ export PS1='\[\033[33m\]\u@MacMini\[\033[00m\]:\[\033[36m\]\w\[\033[35m\]$(__git
 [ -f ~/.aliases ] && source ~/.aliases
 
 # gobrew
-#export PATH="$HOME/.gobrew/bin:$PATH"
-#eval "$(gobrew init -)"
+# export PATH="$HOME/.gobrew/bin:$PATH"
+# eval "$(gobrew init -)"
