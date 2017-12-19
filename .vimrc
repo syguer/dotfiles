@@ -30,7 +30,7 @@ colorscheme hybrid
 "colorscheme Tomorrow-Night
 "colorscheme Tomorrow-Night-Eighties
 "colorscheme Tomorrow-Night-Bright
-" set background=dark
+set background=dark
 
 " augroup source-vimrc
 "   autocmd!
