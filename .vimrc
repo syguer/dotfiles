@@ -150,7 +150,7 @@ let g:ctrlp_max_files = 0
 
 NeoBundle 'nixprime/cpsm'
 let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
-let g:ctrlp_user_command = 'files -a %s'
+let g:ctrlp_user_command = 'find %s -type f'
 
 NeoBundle 'thinca/vim-qfreplace'
 nnoremap <Leader>Q :Qfreplace<ESC>
