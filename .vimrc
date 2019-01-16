@@ -68,9 +68,9 @@ NeoBundle 'tpope/vim-surround'
 " NeoBundle "Townk/vim-autoclose"
 NeoBundle 'tpope/vim-markdown'
 NeoBundle 'tyru/open-browser.vim'
-NeoBundle 'digitaltoad/vim-jade'
+" NeoBundle 'digitaltoad/vim-jade'
 NeoBundle 'hail2u/vim-css3-syntax'
-NeoBundle 'vim-scripts/matchparenpp'
+" NeoBundle 'vim-scripts/matchparenpp'
 NeoBundle 'tpope/vim-abolish'
 NeoBundle 'ujihisa/neco-look'
 NeoBundle 'tpope/vim-unimpaired'
@@ -111,6 +111,8 @@ nnoremap <Leader>, A,<ESC>
 nnoremap <Space>[ ^<ESC>
 nnoremap <Space>] $<ESC>
 nnoremap <Space>c :echo @%<CR>
+nnoremap <Space>f :GoFmt<ESC>
+nnoremap <Space>i :GoImport<ESC>
 
 noremap @t :call InsertTodo()<CR>
 noremap @f :call InsertFixme()<CR>
@@ -182,8 +184,6 @@ NeoBundle 'Shougo/vimproc.vim' , {
       \ 'build' : {
       \     'linux' : 'make'},
 \}
-NeoBundle 'Shougo/vimshell.vim'
-nnoremap <silent> ,sh :VimShell<CR>
 
 NeoBundle 'airblade/vim-gitgutter'
 let g:gitgutter_realtime = 0
@@ -381,9 +381,11 @@ NeoBundle 'kchmck/vim-coffee-script'
 au BufRead,BufNewFile,BufReadPre *.coffee   set filetype=coffee
 
 "for golang
+NeoBundle 'fatih/vim-go'
 NeoBundle 'vim-jp/vim-go-extra'
 exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
 au FileType go setlocal sw=4 ts=4 sts=4 noet
+let g:go_fmt_command = "goimports"
 
 ""for php
 " autocmd FileType php,ctp :set dictionary=~/.vim/dict/php.dict

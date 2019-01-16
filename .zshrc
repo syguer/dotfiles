@@ -22,7 +22,8 @@ alias g=git
 alias t=tmux
 alias v=vim
 alias d=docker
-alias gcc=gcc-4.9
+alias dco=docker-compose
+alias my=mycli
 alias vrc='vim ~/dotfiles/.vimrc'
 alias zrc='vim ~/dotfiles/.zshrc'
 alias gcon='vim ~/dotfiles/.gitconfig'
@@ -59,7 +60,8 @@ PATH=/usr/local/bin:$PATH
 PATH=$(brew --prefix)/bin:$HOME/.composer/vendor/bin/:$HOME/.rbenv/bin:$PATH
 eval "$(rbenv init -)"
 
-# using peco
+# using fzf
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 function peco-select-history() {
     local tac
     if which tac > /dev/null; then
@@ -69,7 +71,7 @@ function peco-select-history() {
     fi
     BUFFER=$(history -n 1 | \
         eval $tac | \
-        peco --query "$LBUFFER")
+        fzf --query "$LBUFFER")
     CURSOR=$#BUFFER
     zle clear-screen
 }
@@ -112,3 +114,6 @@ export PS1='\[\033[33m\]\u@MacMini\[\033[00m\]:\[\033[36m\]\w\[\033[35m\]$(__git
 # gobrew
 # export PATH="$HOME/.gobrew/bin:$PATH"
 # eval "$(gobrew init -)"
+
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
