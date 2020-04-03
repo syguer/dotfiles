@@ -1,0 +1,164 @@
+"init all settings
+set all&
+" init autocmd
+autocmd!
+
+set autoindent
+set cursorline
+set expandtab
+set hlsearch
+set incsearch
+set nobackup
+set noswapfile
+set number
+set smarttab
+
+set ambiwidth=double
+set backspace=indent,eol,start
+set foldmethod=manual
+set scrolloff=5
+set tags=tags
+
+" color
+set background=dark
+colorscheme OceanicNext
+" colorscheme hybrid
+
+
+"save undo
+if has('persistent_undo')
+  set undodir=~/.vim/undo
+  set undofile
+endif
+
+
+"set cusor on last saved line
+au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\""
+
+
+"color unnecessaly space
+augroup HighlightTrailingSpaces
+  autocmd!
+  autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces term=underline guibg=Red ctermbg=Red
+  autocmd VimEnter,WinEnter * match TrailingSpaces /\s\+$/
+augroup END
+
+
+"default
+set tabstop=2
+set shiftwidth=2
+set laststatus=2
+
+"Change shortcut
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+cnoremap <C-f> <Right>
+cnoremap <C-b> <Left>
+cnoremap <C-e> <End>
+cnoremap <C-a> <Home>
+nnoremap j gj
+nnoremap k gk
+nnoremap gj j
+nnoremap gk k
+
+nnoremap Q :ccl<CR>
+nnoremap <C-h> :noh<CR>
+
+call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-surround'
+Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-speeddating'
+Plug 'kana/vim-tabpagecd'
+Plug 'tomtom/tlib_vim'
+Plug 'ujihisa/neco-look'
+
+" Plug 'tpope/vim-markdown'
+" Plug 'tyru/open-browser.vim'
+" Plug 'ap/vim-css-color'
+" Plug 'hail2u/vim-css3-syntax'
+" Plug 'KabbAmine/vCoolor.vim'
+
+Plug 'ctrlpvim/ctrlp.vim'
+let g:ctrlp_cmd = 'CtrlPMRU'
+let g:ctrlp_extensions = ['tag', 'mixed', 'line']
+let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_mruf_relative = 1
+let g:ctrlp_max_files = 0
+
+Plug 'nixprime/cpsm'
+let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
+let g:ctrlp_user_command = 'find %s -type f'
+
+Plug 'thinca/vim-qfreplace'
+nnoremap <Leader>Q :Qfreplace<ESC>
+
+Plug 'rking/ag.vim'
+let g:ag_prg="ag --column"
+
+Plug 'tpope/vim-fugitive'
+nnoremap <silent> ,gs :Gstatus<CR>
+nnoremap <silent> ,gd :Gdiff<CR>
+nnoremap <silent> ,gb :Gblame<CR>
+nnoremap <silent> ,gpo :Gpush origin<CR>
+nnoremap <silent> ,gco :Git checkout
+
+Plug 'airblade/vim-gitgutter'
+let g:gitgutter_realtime = 0
+nnoremap ,h :GitGutterLineHighlightsToggle<CR>
+
+Plug 'bling/vim-airline'
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_left_sep = '▶'
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#syntastic#enabled = 1
+
+Plug 'preservim/nerdtree'
+nmap <silent> <C-e>      :NERDTreeToggle<CR>
+vmap <silent> <C-e> <Esc>:NERDTreeToggle<CR>
+omap <silent> <C-e>      :NERDTreeToggle<CR>
+imap <silent> <C-e> <Esc>:NERDTreeToggle<CR>
+let g:NERDTreeIgnore=['\.clean$', '\.swp$', '\.bak$', '\~$']
+let g:NERDTreeShowHidden=1
+autocmd StdinReadPre * let s:std_in=1
+
+Plug 'majutsushi/tagbar'
+nmap <silent> ,t :TagbarToggle<CR>
+
+let g:tagbar_type_ruby = {
+    \ 'kinds' : [
+        \ 'm:modules',
+        \ 'c:classes',
+        \ 'd:describes',
+        \ 'C:contexts',
+        \ 'f:methods',
+        \ 'F:singleton methods'
+    \ ]
+\ }
+
+Plug 'junegunn/vim-easy-align'
+vmap <Enter> <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
+" lsp
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+
+Plug 'SirVer/ultisnips'
+Plug 'thomasfaingnaert/vim-lsp-snippets'
+Plug 'thomasfaingnaert/vim-lsp-ultisnips'
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+call plug#end()
+
+set encoding=utf-8
